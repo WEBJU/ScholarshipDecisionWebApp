@@ -18,9 +18,15 @@ class Session {
     public static function getUserInfo() {
         return [
             'id' => $_SESSION['user_id'] ?? null,
-            'first_name' => $_SESSION['first_name'] ?? '',
-            'last_name' => $_SESSION['last_name'] ?? ''
+            'first_name' => $_SESSION['first_name'] ?? null,
+            'last_name' => $_SESSION['last_name'] ?? null
         ];
+    }
+
+    public static function setUser($id, $first_name, $last_name) {
+        $_SESSION['user_id'] = $id;
+        $_SESSION['first_name'] = $first_name;
+        $_SESSION['last_name'] = $last_name;
     }
 }
 ?>

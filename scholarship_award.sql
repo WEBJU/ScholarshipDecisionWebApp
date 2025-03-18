@@ -65,6 +65,26 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
+
+CREATE TABLE scholarships (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    education_qualification ENUM('Undergraduate', 'Postgraduate', 'Diploma', 'Certificate') NOT NULL,
+    income_level VARCHAR(50) NOT NULL,
+    annual_percentage_score VARCHAR(20) NOT NULL,
+    gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    disability ENUM('Yes', 'No') NOT NULL,
+    sports ENUM('Yes', 'No') NOT NULL,
+    award_status ENUM('Pending', 'Awarded', 'Rejected') DEFAULT 'Pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+INSERT INTO scholarships (first_name, last_name, education_qualification, income_level, annual_percentage_score, gender, disability, sports, award_status)
+VALUES ('Jane', 'Doe', 'Undergraduate', 'Up to 223,242 KES', '60-70', 'Male', 'Yes', 'Yes', 'Pending');
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

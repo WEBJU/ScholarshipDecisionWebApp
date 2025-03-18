@@ -1,3 +1,10 @@
+ <?php 
+require_once __DIR__ . '/../user/Session.php';
+Session::start();
+$user = Session::getUserInfo();
+$isLoggedIn = Session::isLoggedIn();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,21 +68,27 @@
                     class="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">About</a>
                 <a href="./analyze.php"
                     class="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Analyze Application</a>
-                <a href="./analyze.php"
+                <a href="./history.php"
                     class="font-bold duration-100 transition-color hover:text-indigo-600">History</a>
-                <div class="flex flex-col block w-full font-medium border-t border-gray-200 md:hidden">
-                    <a href="../auth/login.php" class="w-full py-2 font-bold text-center text-pink-500">Login</a>
+                <!-- <div class="flex flex-col block w-full font-medium border-t border-gray-200 md:hidden">
+                    <a href="./auth/login.php" class="w-full py-2 font-bold text-center text-pink-500">Login</a>
                     <a href="../auth/register.php"
                         class="relative inline-block w-full px-5 py-3 text-sm leading-none text-center text-white bg-indigo-700 fold-bold">Get
                         Started</a>
-                </div>
+                </div> -->
             </nav>
 
             <div
                 class="absolute left-0 flex-col items-center justify-center hidden w-full pb-8 mt-48 border-b border-gray-200 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between">
-                <a href="./auth/login.php"
+                
+                
+                <?php if ($isLoggedIn): ?>
+                    <span class="text-gray-800 font-bold">Welcome, <?= htmlspecialchars($user['first_name']) ?>!</span>
+                    <a href="./logout.php" class="ml-4 text-red-500 font-bold">Logout</a>
+                <?php else: ?>
+                    <a href="./login.php"
                     class="relative z-40 px-3 py-2 mr-0 text-sm font-bold text-pink-500 md:px-5 lg:text-white sm:mr-3 md:mt-0">Login</a>
-                <a href="./auth/register.php"
+                <a href="./register.php"
                     class="relative z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white transition-all transition duration-100 duration-300 bg-indigo-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl">Get
                     Started</a>
                 <svg class="absolute top-0 left-0 hidden w-screen max-w-3xl -mt-64 -ml-12 lg:block"
@@ -119,6 +132,9 @@
                         </g>
                     </g>
                 </svg>
+                <?php endif; ?>
+           
+                
             </div>
 
             <div id="nav-mobile-btn"
@@ -130,3 +146,5 @@
         </div>
     </header>
     <!-- End Header Section-->
+
+
